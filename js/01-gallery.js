@@ -1,7 +1,9 @@
 import { galleryItems } from "./gallery-items.js";
 // Change code below this line
 const container = document.querySelector(".js-gallery");
+
 let instance;
+
 const markup = galleryItems
   .map(
     ({ preview, original, description }) =>
@@ -25,14 +27,17 @@ container.addEventListener("click", (event) => {
   );
 
   instance.show();
+
+  document.addEventListener("keydown", eventListener);
 });
 
-document.addEventListener("keydown", (event) => {
+const eventListener = (event) => {
   if (event.key === "Escape") {
     if (instance) {
       instance.close();
+      document.removeEventListener("keydown", eventListener);
     }
   }
-});
+};
 
 console.log(galleryItems);
